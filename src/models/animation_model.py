@@ -13,7 +13,7 @@ STAR_COLORS = [
 class Star:
     """Звезда в трёхмерном пространстве"""
 
-    def __init__(self, max_depth: float):
+    def __init__(self, max_depth):
         """Инициализирует звезду"""
         self.max_depth = max_depth
         self.color = random.choice(STAR_COLORS)
@@ -33,8 +33,10 @@ class Star:
 
         self.x = random.uniform(-1000, 1000)
         self.y = random.uniform(-1000, 1000)
+
         if new:
             self.z = random.uniform(1, self.max_depth)
+
         else:
             self.z = self.max_depth
         self.prev_sx = None
@@ -42,8 +44,10 @@ class Star:
 
     def project(self, focal_length, cx, cy):
         """Проецирует 3D-координаты на 2D-экран"""
+
         if self.z <= 0:
             return None
+
         factor = focal_length / self.z
         sx = self.x * factor + cx
         sy = self.y * factor + cy
@@ -52,8 +56,10 @@ class Star:
     def update(self, speed, dt, dir_x, dir_y, cx, cy, focal_length=300.0):
         """Обновляет позицию звезды за один кадр"""
         projected = self.project(focal_length, cx, cy)
+
         if projected is not None:
             self.prev_sx, self.prev_sy = projected
+
         else:
             self.prev_sx = None
             self.prev_sy = None
@@ -81,11 +87,14 @@ class Star:
 
     def get_trail_length(self, focal_length, cx, cy):
         """Вычисляет длину следа в пикселях."""
+
         if self.prev_sx is None or self.prev_sy is None:
             return 0.0
         projected = self.project(focal_length, cx, cy)
+
         if projected is None:
             return 0.0
+
         sx, sy = projected
         dx = sx - self.prev_sx
         dy = sy - self.prev_sy
