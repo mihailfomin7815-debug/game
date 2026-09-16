@@ -22,5 +22,4 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone https://github.com/ВАШ_ЛОГИН/animation_project.git
-cd animation_project
+git clone git https://github.com/mihailfomin7815-debug/game.git
